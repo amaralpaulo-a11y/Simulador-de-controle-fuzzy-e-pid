@@ -3,7 +3,11 @@
 
 ## Descrição
 
-Este projeto implementa um sistema de controle de densidade para uma planta simulada de preparo de fluido de perfuração de poços de petróleo. A comunicação é realizada via sockets entre um cliente desenvolvido em LabVIEW e um servidor em Python.
+Este projeto implementa um sistema de controle de densidade para uma planta de preparo de fluido de perfuração de poços de petróleo. O trabalho foi desenvolvido no Laboratório de Escoamento de Fluidos Giulio Massarani (UFRRJ), onde há uma planta de preparo automático de desse tipo de fluido. O presente trabalho foi realizado em ambiente simulado, sendo a planta representada a partir de um modelo matemático no formato de uma equação diferencial ordinária.
+
+O controle da densidade é realizado por meio de sinais de corrente elétrica(4 a 20 mA) aplicados aos atuadores do sistema: uma bomba para ajuste de água e um dosador para alimentação de barita.
+
+A comunicação é realizada via sockets entre um cliente desenvolvido em LabVIEW(simula planta) e um servidor em Python.
 
 O sistema permite a utilização de dois tipos de controladores:
 
@@ -78,7 +82,7 @@ O sistema é composto por três partes principais:
 
 ### Formato dos Dados
 
-#### Cliente PID
+#### Cliente para o PID
 
 O cliente PID envia **5 valores**:
 
@@ -92,7 +96,7 @@ Exemplo:
 1.2%1.0%2.0%0.5%0.1
 
 
-#### Cliente Fuzzy
+#### Cliente para o Fuzzy
 
 O cliente Fuzzy envia **2 valores**:
 
@@ -126,7 +130,7 @@ Para executar o cliente corretamente:
 
 Os parâmetros são definidos diretamente na interface do cliente LabVIEW:
 
-#### Para o Cliente PID
+#### Para o Cliente que comunica com o PID
 - Setpoint (valor desejado de densidade)
 - Densidade inicial (condição da planta simulada)
 - Ganhos do controlador:
@@ -134,7 +138,7 @@ Os parâmetros são definidos diretamente na interface do cliente LabVIEW:
 - Ki
 - Kd
 
-#### Para o Cliente Fuzzy
+#### Para o Cliente que comunica com o Fuzzy
 - Setpoint
 - Densidade inicial
 
@@ -163,10 +167,6 @@ O cliente possui um botão que permite:
 
 Esse recurso permite analisar respostas típicas de controle do tipo **servo**, como:
 
-- Tempo de subida
-- Sobressinal (overshoot)
-- Tempo de acomodação
-- Erro em regime permanente
 
 A cada alteração no setpoint:
 - O sistema reage automaticamente.
